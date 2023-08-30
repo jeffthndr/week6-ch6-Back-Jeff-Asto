@@ -1,15 +1,18 @@
-import debug from 'debug';
+/* eslint-disable no-unused-vars */
 import { NextFunction, Request, Response } from 'express';
-import { Character } from '../entities/character.js';
 import { Repository } from '../repository/repository.js';
-import { ControllerStructure } from './controller.js';
 
-export class CharacterController implements ControllerStructure {
-  constructor(private repo: Repository<Character>) {
-    this.repo = repo;
-    debug('Instantiated');
-  }
+export interface ControllerStructure {
+  getAll(req: Request, res: Response, next: NextFunction): Promise<void>;
+  getById(req: Request, res: Response, next: NextFunction): Promise<void>;
+  create(req: Request, res: Response, next: NextFunction): Promise<void>;
+  update(req: Request, res: Response, next: NextFunction): Promise<void>;
+  delete(req: Request, res: Response, next: NextFunction): Promise<void>;
+}
 
+export abstract class Controller<T extends { id: string | number }> {
+  // eslint-disable-next-line no-useless-constructor
+  constructor(protected repo: Repository<T>) {}
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const data = await this.repo.getAll();

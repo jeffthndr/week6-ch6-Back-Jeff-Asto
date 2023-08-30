@@ -1,6 +1,6 @@
 import createDebug from 'debug';
 import { Router as createRouter } from 'express';
-import { CharacterController } from '../Controller/characters.controller.js';
+import { CharacterController } from '../controller/characters.controller.js';
 import { CharactersFsRepository } from '../repository/character.fs.repository.js';
 const debug = createDebug('W6CH6:Router:charactersRouter');
 
