@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import { errorMiddleware } from './middleware/error.middleware.js';
 import { characterRouter } from './router/characters.router.js';
 import { partnerRouter } from './router/partners.router.js';
+import { userRouter } from './router/user.router.js';
 
 const debug = createDebug('W6CH6:App');
 
@@ -20,4 +21,6 @@ app.use(express.static('public'));
 
 app.use('/characters', characterRouter);
 app.use('/partners', partnerRouter);
+app.use('/users', userRouter);
+
 app.use(errorMiddleware);
