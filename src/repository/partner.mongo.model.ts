@@ -20,6 +20,19 @@ const partnerSchema = new Schema<Partner>({
     type: String,
     required: true,
   },
+  movies: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
+});
+
+partnerSchema.set('toJSON', {
+  transform(_document, returnedObject) {
+    returnedObject.id = returnedObject._id;
+    delete returnedObject._id;
+    delete returnedObject.__v;
+    delete returnedObject.passwd;
+  },
 });
 
 export const PartnerModel = model('Partner', partnerSchema, 'partners');
